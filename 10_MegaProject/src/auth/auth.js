@@ -8,8 +8,8 @@ export class AuthService{
 
     constructor(){
         this.client
-        .setEndpoint(appwriteUrl)  
-        .setProject(appwriteProjectId);      
+        .setEndpoint(conf.appwriteUrl)  
+        .setProject(conf.appwriteProjectId);      
         
         this.account=new Account(this.client)
     }
@@ -25,7 +25,7 @@ export class AuthService{
              }
         }
          catch (error) {
-            throw error;
+            console.log("createAccount::"+error)
         }
     }
 
@@ -33,7 +33,7 @@ export class AuthService{
         try {
             return await this.account.createEmailSession(email,password);
         } catch (error) {
-            throw error;
+            console.log("login::"+error)
         }
     }
 
@@ -42,7 +42,7 @@ export class AuthService{
             return await this.account.get()
         }
          catch (error) {
-            throw error;
+            console.log("getCurrentuser::"+error)
         }
         return null;
     }
@@ -51,7 +51,7 @@ export class AuthService{
         try {
             return await this.account.deleteSessions();
         } catch (error) {
-            throw error;
+            console.log("logout::"+error)
         }
     }
 }
