@@ -1,8 +1,8 @@
 import React from "react";
 import {LogoutBtn,Container,Logo} from '../index'
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import{useNavigate} from 'react-router-dom'
 
 function Header(){
     const authStatus=useSelector((state)=>state.auth.status)
@@ -38,7 +38,7 @@ function Header(){
 
     return(
         <header className='py-3 shadow bg-gray-500'>
-            <Container>
+            {/* <Container> */}
                 <nav className='flex'>
                     <div className='mr-4'>
                         <Link 
@@ -63,8 +63,9 @@ function Header(){
                     </li>
                     )}
                     </ul>
+                    
                 </nav>
-            </Container>
+            {/* </Container> */}
         </header>
     )
 }

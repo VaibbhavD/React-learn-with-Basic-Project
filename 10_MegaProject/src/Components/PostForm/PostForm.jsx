@@ -2,10 +2,10 @@ import {Button,Input,Select,RTE} from '../index'
 import Service from '../../appwrite/config'
 import {useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useCallback } from 'react'
+import React,{ useCallback } from 'react'
 import {useForm} from 'react-hook-form'
 
-function PostForm({post}){
+export default function PostForm({post}){
       const{register,handleSubmit,watch,setValue,control,getValues}=useForm({
       defaultValue:{
         title:post?.title || "",
@@ -18,7 +18,7 @@ function PostForm({post}){
     const navigate=useNavigate()
     const userdata=useSelector((state)=>state.auth.userdata)
 
-    const submit=async()=>{
+    const submit=async(data)=>{
         if(post){
             const file=data.image[0]?await Service.uploadFile(data.image[0]):null;
 
@@ -29,7 +29,7 @@ function PostForm({post}){
                 featuredImage:file?file.$id:undefined,
             })
             if(dbpost){
-                navigate(`/post/dbpost.$id`);
+                navigate(`/post/${dbpost.$id}`);
             }
         }
         else{
@@ -38,10 +38,10 @@ function PostForm({post}){
             if(file){
             const fileid=file.$id;
             data.featuredImage=fileid;
-            const dbpost= await Service.createPost({...data,userId:userdata.$id})
+            const dbpost= await Service.createPost({...data,userId:userdata.$id});
 
             if(dbpost){
-                navigate(`/post/dbpost.$id`)
+                navigate(`/post/${dbpost.$id}`)
             }
         }
     }
@@ -118,4 +118,4 @@ React.useEffect(() => {
 </form>
 );
 }
-export default PostForm
+// export default PostForm

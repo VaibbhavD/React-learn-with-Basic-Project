@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Link, useNavigate} from 'react-router-dom'
-import {Button,Input,Logo} from '../Components/index'
+import {Button,Input,Logo} from './index'
 import { login as authLogin  } from "../store/authSlice";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
@@ -10,13 +10,13 @@ function Login(){
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const [error,seterror]=useState("")
-    const[register,handleSubmit]=useForm()
+    const{register,handleSubmit}=useForm()
 
     const login=async(data)=>{
         seterror("")
         try {
-            const userData=await authService.login(data)
-            if(userData)
+            const session=await authService.login(data)
+            if(session)
             {
                 const user=await authService.getCurrentuser()
                 if(user)
@@ -27,13 +27,14 @@ function Login(){
             }
         } 
         catch (error) {
-            seterror(error)
+            seterror(error.message)
+            
         }
     }
 
     return (
         <div
-    className='flex items-center justify-center w-full'
+    className='flex items-center justify-center w-full '
     >
         <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
         <div className="mb-2 flex justify-center">

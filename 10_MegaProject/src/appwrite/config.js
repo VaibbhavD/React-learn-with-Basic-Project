@@ -1,9 +1,9 @@
 import conf from "../conf/conf";
 import {Client,ID,Databases,Query,Storage} from 'appwrite'
 
-export class Service{
+export class service{
     client=new Client()
-    databese;
+    database;
     storage;
 
     constructor(){
@@ -36,9 +36,9 @@ export class Service{
 
     }
 
-    async updatePost(slug,{title,content,featuredImage,status,userId}){
+    async updatePost(slug,{title,content,featuredImage,status}){
         try {
-            return await this.databese.updateDocument(
+            return await this.database.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
@@ -57,7 +57,7 @@ export class Service{
 
     async deletePost(slug){
         try {
-             await this.databese.deleteDocument(
+             await this.database.deleteDocument(
                 conf.appwriteDatabaseId,
                 cong.appwriteCollectionId,
                 slug
@@ -71,7 +71,7 @@ export class Service{
 
     async getPost(slug){
         try {
-            return await this.databese.getDocument(
+            return await this.database.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
@@ -79,20 +79,21 @@ export class Service{
         } 
         catch (error) {
             console.log("getPost::"+error)
+            return false;
         }
 
     }
 
-    async getPosts(quaries=[Query.equal("status","active")]){
+    async getPosts(){
         try {
-            return await this.databese.listDocuments(
+            return await this.database.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                quaries
             )
         } 
         catch (error) {
             console.log("getPosts::"+error)
+            return false;
         }
     }
 
@@ -125,7 +126,7 @@ export class Service{
         }
     }
 
-     getFilepreview(fileId){
+     getFilePreview(fileId){
        
         return this.storage.getFilePreview(
             conf.appwriteBucketId,
@@ -139,5 +140,5 @@ export class Service{
 
 
 
-const Service=new Service()
+const Service=new service()
 export default Service

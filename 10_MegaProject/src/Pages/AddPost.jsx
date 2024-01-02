@@ -1,7 +1,7 @@
 import React from "react";
 import {Container,PostForm} from '../Components/index'
 
-function AddPost(params) {
+function AddPost() {
     
     return(
         <div className="py-8">

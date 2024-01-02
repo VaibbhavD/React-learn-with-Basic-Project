@@ -7,7 +7,7 @@ import { login } from "../store/authSlice";
 import { useDispatch } from "react-redux";
 
 
-function SignUp(){
+function Vaibhav(){
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const [error,seterror]=useState("")
@@ -22,7 +22,7 @@ function SignUp(){
                 const userdata=await authService.getCurrentuser()
                 if(userdata)
                 {
-                    dispatch(login(userdata))
+                    dispatch(login({userdata}))
                     navigate("/")
                 }
             }
@@ -91,4 +91,4 @@ function SignUp(){
 </div>
 )
 }
-export default SignUp
+export default Vaibhav

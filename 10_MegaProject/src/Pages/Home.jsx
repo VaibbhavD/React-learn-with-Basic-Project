@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import React,{ useState,useEffect } from "react";
 import {Container,PostCard} from "../Components/index"
 import Service from "../appwrite/config";
 
@@ -7,7 +7,7 @@ function Home() {
     const[posts,setpost]=useState([])
 
     useEffect(()=>{
-        Service.getPost().then((posts)=>{
+        Service.getPosts().then((posts)=>{
             if(posts)
             {
             setpost(posts.documents)
@@ -17,7 +17,7 @@ function Home() {
 
     if (posts.length === 0) {
         return (
-            <div className="w-full h-full py-8 mt-4 text-center">
+            <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
@@ -45,4 +45,4 @@ function Home() {
     </div>
     )
 }
-export default Home;
+export default Home

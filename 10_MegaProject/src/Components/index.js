@@ -1,4 +1,4 @@
-import Header from "./Header/Header"
+import Header from './Header/Header'
 import Footer from "./footer/Footer"
 import Container from './Container/Contanier'
 import Logo from "./Logo"
@@ -11,6 +11,7 @@ import SignUp from "./SingnUp"
 import Login from './Login'
 import PostForm from "./PostForm/PostForm"
 import PostCard from './PostCrad'
+import AuthLayout from "./AuthLayout"
 
 export {
     Header,
@@ -25,5 +26,6 @@ export {
     SignUp,
     Login,
     PostForm,
-    PostCard
+    PostCard,
+    AuthLayout
 }
