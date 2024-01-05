@@ -22,6 +22,7 @@ function Login(){
                 if(user)
                 {
                     dispatch(authLogin(user));
+                    console.log(user)
                     navigate("/")
                 }
             }
@@ -52,13 +53,13 @@ function Login(){
                         Sign Up
                     </Link>
         </p>
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        {error && <p className="text-red-600 mt-8 text-center ">{error}</p>}
         <form onSubmit={handleSubmit(login)} className='mt-8'>
             <div className='space-y-5'>
                 <Input
                 label="Email :"
                 type="email"
-                palaceholder="Email Id"
+                palaceholder="Enter Your Email Id"
                 {...register("email",{
                     required:true,
                     validate:{
@@ -69,10 +70,10 @@ function Login(){
                 />
                 <Input
                 label="Password :"
-                type="text"
-                palaceholder="Password"
-                {...register("Password",{
-                    required:true
+                type="password"
+                palaceholder="Enter Your Password"
+                {...register("password",{
+                    required:true,
                 })}
                 />
                 <Button

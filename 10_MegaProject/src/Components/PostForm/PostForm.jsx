@@ -1,7 +1,6 @@
 import {Button,Input,Select,RTE} from '../index'
 import Service from '../../appwrite/config'
 import {useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import React,{ useCallback } from 'react'
 import {useForm} from 'react-hook-form'
 
@@ -16,9 +15,9 @@ export default function PostForm({post}){
     });
 
     const navigate=useNavigate()
-    const userdata=useSelector((state)=>state.auth.userdata)
 
     const submit=async(data)=>{
+       
         if(post){
             const file=data.image[0]?await Service.uploadFile(data.image[0]):null;
 
@@ -34,11 +33,12 @@ export default function PostForm({post}){
         }
         else{
             const file=await Service.uploadFile(data.image[0]);
+            console.log("unPost")
 
             if(file){
             const fileid=file.$id;
             data.featuredImage=fileid;
-            const dbpost= await Service.createPost({...data,userId:userdata.$id});
+            const dbpost= await Service.createPost({...data,userId:data.featuredImage });
 
             if(dbpost){
                 navigate(`/post/${dbpost.$id}`)
@@ -99,7 +99,7 @@ React.useEffect(() => {
         {post && (
             <div className="w-full mb-4">
                 <img
-                    src={appwriteService.getFilePreview(post.featuredImage)}
+                    src={Service.getFilePreview(post.featuredImage)}
                     alt={post.title}
                     className="rounded-lg"
                 />

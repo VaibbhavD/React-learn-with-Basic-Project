@@ -5,13 +5,13 @@ import { useId } from "react";
 function Select({
     options,
     label,
-    className="",
+    className,
     ...props
 },ref) {
     const id=useId();
     return (
         <div className="w-full">
-            {label && <label htmlfor={id} className=''></label>}
+            {label && <label htmlFor={id} className=''></label>}
 
             <select 
             {...props}

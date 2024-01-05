@@ -11,8 +11,10 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
+    
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
+    console.log(userData)
 
     useEffect(() => {
         if (slug) {
@@ -33,7 +35,7 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-8 w-1/2 h-1/2 ">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img

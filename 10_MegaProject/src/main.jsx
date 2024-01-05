@@ -12,7 +12,6 @@ import Allposts from './Pages/AllPosts.jsx'
 import AddPost from './Pages/AddPost.jsx'
 import EditPost from './Pages/EditPost.jsx'
 import Post from './Pages/Post.jsx'
-import VaibhavPage from './Pages/Vaibhav.jsx'
 
 
 const router=createBrowserRouter([
@@ -26,45 +25,38 @@ const router=createBrowserRouter([
       },
       {
         path:"/login",
-        element:<Login/>
+        element:
         // (
         //   <AuthLayout authentication={false}>
-        //     <Login/>
+                     <Login/> 
         //   </AuthLayout>
         // )
       },
         {
           path:'/signup',
-          element:<Signup/>
+          element:(
+            <AuthLayout authentication={false}>
+                       <Signup/>  
+            </AuthLayout>
+          )
+        },
+        {
+          path:"/all-posts",
+          element:
           // (
-          //   <AuthLayout authentication={false}>
-          //     <Signup/>
+          //   <AuthLayout authentication={true}>
+                     <Allposts/>    
           //   </AuthLayout>
           // )
         },
         {
-          path:"/all-posts",
-          element:(
-            <AuthLayout authentication={" "}>
-            <Allposts/>              
-            </AuthLayout>
-          )
-        },
-        {
           path:"/add-post",
-          element:(
-            <AuthLayout authentication={" "}>
-            <AddPost/>             
-            </AuthLayout>
-          )
+          element:<AddPost/>             
         },
         {
           path:"/edit-post/:slug",
-          element:(
-            <AuthLayout authentication={" "}>
+          element:
             <EditPost/>            
-            </AuthLayout>
-          )
         },
         {
           path:"/post/:slug",

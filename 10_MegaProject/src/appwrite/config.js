@@ -1,4 +1,4 @@
-import conf from "../conf/conf";
+import conf from '../conf/conf';
 import {Client,ID,Databases,Query,Storage} from 'appwrite'
 
 export class service{
@@ -11,13 +11,13 @@ export class service{
         .setEndpoint(conf.appwriteUrl)  
         .setProject(conf.appwriteProjectId);      
         
-        this.databese=new Databases(this.client)
+        this.database=new Databases(this.client)
         this.storage=new Storage(this.client)
     }
 
     async createPost({title,slug,content,featuredImage,status,userId}){
         try {
-                return await this.databese.createDocument(
+                return await this.database.createDocument(
                     conf.appwriteDatabaseId,
                     conf.appwriteCollectionId,
                     slug,
@@ -84,11 +84,12 @@ export class service{
 
     }
 
-    async getPosts(){
+    async getPosts(queries = [Query.equal("status", "active")]){
         try {
             return await this.database.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
+                queries,
             )
         } 
         catch (error) {
